@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Heading, Text, Button, Input, Textarea, Select, Progress, Flex, Spacer, IconButton, Table, Thead, Tbody, Tr, Th, Td, Link, FormControl, FormLabel } from "@chakra-ui/react";
+import { Box, Heading, Text, Button, Input, Textarea, Select, Progress, Flex, Spacer, IconButton, Table, Thead, Tbody, Tr, Th, Td, Link } from "@chakra-ui/react";
 import { FaPlus, FaClock, FaVideo } from "react-icons/fa";
 
 const Index = () => {
@@ -8,7 +8,6 @@ const Index = () => {
   const [timeCard, setTimeCard] = useState({ clockedIn: false, startTime: null, endTime: null });
   const [activities, setActivities] = useState([]);
   const [newActivity, setNewActivity] = useState({ name: "", startTime: null, endTime: null });
-  const [newMeeting, setNewMeeting] = useState({ title: "", date: "", recordingUrl: "" });
   const [meetings, setMeetings] = useState([
     { id: 1, title: "Meeting 1", date: "2023-06-01", recordingUrl: "https://example.com/meeting1" },
     { id: 2, title: "Meeting 2", date: "2023-06-05", recordingUrl: "https://example.com/meeting2" },
@@ -42,15 +41,6 @@ const Index = () => {
   const endActivity = () => {
     setActivities([...activities, { ...newActivity, endTime: new Date() }]);
     setNewActivity({ name: "", startTime: null, endTime: null });
-  };
-
-  const handleNewMeetingChange = (e) => {
-    setNewMeeting({ ...newMeeting, [e.target.name]: e.target.value });
-  };
-
-  const addMeeting = () => {
-    setMeetings([...meetings, { ...newMeeting, id: Date.now() }]);
-    setNewMeeting({ title: "", date: "", recordingUrl: "" });
   };
 
   return (
@@ -141,25 +131,6 @@ const Index = () => {
             ))}
           </Tbody>
         </Table>
-      </Box>
-
-      <Box mb={8}>
-        <Heading as="h2" size="lg" mb={2}>
-          Record New Meeting
-        </Heading>
-        <FormControl id="meetingTitle" mb={2}>
-          <FormLabel>Meeting Title</FormLabel>
-          <Input name="title" placeholder="Meeting Title" value={newMeeting.title} onChange={handleNewMeetingChange} />
-        </FormControl>
-        <FormControl id="meetingDate" mb={2}>
-          <FormLabel>Meeting Date</FormLabel>
-          <Input name="date" placeholder="Meeting Date" value={newMeeting.date} onChange={handleNewMeetingChange} />
-        </FormControl>
-        <FormControl id="recordingUrl" mb={2}>
-          <FormLabel>Recording URL</FormLabel>
-          <Input name="recordingUrl" placeholder="Recording URL" value={newMeeting.recordingUrl} onChange={handleNewMeetingChange} />
-        </FormControl>
-        <Button onClick={addMeeting}>Add Meeting</Button>
       </Box>
 
       <Box>
